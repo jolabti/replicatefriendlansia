@@ -22,7 +22,7 @@ class Welcome extends CI_Controller {
 			"gender_user"=>"Perempuan",
 			"ttl_user"=>""
 		);
-		$this->manufriend_model->mm_insert_user($data);
+		$this->Manufriend_model->mm_insert_user($data);
 		echo "sudah masuk";
 	}
 	public function hapus($idgue)
@@ -30,7 +30,7 @@ class Welcome extends CI_Controller {
 		$data = array(
 			"id_user"=>$idgue
 		);
-		$this->manufriend_model->mm_delete_user($data);
+		$this->Manufriend_model->mm_delete_user($data);
 		echo "sudah dihapus";
 	}
 	public function memperbaharui($idgue)
@@ -38,7 +38,7 @@ class Welcome extends CI_Controller {
 		$data = array(
 			"id_user"=>$idgue
 		);
-		$this->manufriend_model->mm_update_user($data);
+		$this->Manufriend_model->mm_update_user($data);
 		echo "sudah diupdate";
 	}
 
@@ -48,8 +48,8 @@ class Welcome extends CI_Controller {
 		$var_usermail = $this->input->post("email");
 		$var_userpassword = $this->input->post("password");
 
-		$is_exist =	$this->manufriend_model->mm_cek_user($var_usermail, $var_userpassword);
-		$user_profile = $this->manufriend_model->mm_data_user($var_usermail, $var_userpassword);
+		$is_exist =	$this->Manufriend_model->mm_cek_user($var_usermail, $var_userpassword);
+		$user_profile = $this->Manufriend_model->mm_data_user($var_usermail, $var_userpassword);
 
 		if($is_exist>0){
 				$arrayName = 	
@@ -98,7 +98,7 @@ class Welcome extends CI_Controller {
 	public function transaction(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_transaction();
+		$pass["values"]= $this->Manufriend_model->mm_show_transaction();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -109,7 +109,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_transaction(){
-		$pass["data"]=$this->manufriend_model->mm_show_transaction();
+		$pass["data"]=$this->Manufriend_model->mm_show_transaction();
 		echo json_encode($pass);
 	}
 
@@ -117,7 +117,7 @@ class Welcome extends CI_Controller {
 	public function request(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_request();
+		$pass["values"]= $this->Manufriend_model->mm_show_request();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -128,7 +128,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_request(){
-		$pass["data"]=$this->manufriend_model->mm_show_request();
+		$pass["data"]=$this->Manufriend_model->mm_show_request();
 		echo json_encode($pass);
 	}
 
@@ -136,7 +136,7 @@ class Welcome extends CI_Controller {
 	public function ongoing(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_ongoing();
+		$pass["values"]= $this->Manufriend_model->mm_show_ongoing();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -147,7 +147,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_ongoing(){
-		$pass["data"]=$this->manufriend_model->mm_show_ongoing();
+		$pass["data"]=$this->Manufriend_model->mm_show_ongoing();
 		echo json_encode($pass);
 	}
 
@@ -155,7 +155,7 @@ class Welcome extends CI_Controller {
 	public function done(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_done();
+		$pass["values"]= $this->Manufriend_model->mm_show_done();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -166,14 +166,14 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_done(){
-		$pass["data"]=$this->manufriend_model->mm_show_done();
+		$pass["data"]=$this->Manufriend_model->mm_show_done();
 		echo json_encode($pass);
 	}
 
 	public function button_approve($id_trx){
 		$data="";
 		if($id_trx!=""||$id_trx!=null){
-			$this->manufriend_model->mm_update_transaction_to_ongoing($id_trx);
+			$this->Manufriend_model->mm_update_transaction_to_ongoing($id_trx);
 			redirect("welcome/request");
 		}
 		else{
@@ -185,7 +185,7 @@ class Welcome extends CI_Controller {
 	public function button_done($id_trx){
 		$data="";
 		if($id_trx!=""||$id_trx!=null){
-			$this->manufriend_model->mm_update_transaction_to_done($id_trx);
+			$this->Manufriend_model->mm_update_transaction_to_done($id_trx);
 			redirect("welcome/ongoing");
 		}
 		else{
@@ -198,7 +198,7 @@ class Welcome extends CI_Controller {
 	{
 		$data="";
 		if($id_status=1){
-			$this->manufriend_model->mm_deny_request_trx($id_trx);
+			$this->Manufriend_model->mm_deny_request_trx($id_trx);
 			redirect("welcome/request");
 		}
 		else{
@@ -211,7 +211,7 @@ class Welcome extends CI_Controller {
 	public function button_cancel_ongoing($id_trx){
 		$data="";
 		if($id_status=2){
-			$this->manufriend_model->mm_update_cancel_ongoing($id_trx);
+			$this->Manufriend_model->mm_update_cancel_ongoing($id_trx);
 			redirect("welcome/ongoing");
 		}
 		else{
@@ -223,7 +223,7 @@ class Welcome extends CI_Controller {
 	//CUSTOMER
 	public function user(){
 		$pass["valemail"]= $this->session->userdata["email"];
-		$pass["values"]= $this->manufriend_model->mm_show_user();
+		$pass["values"]= $this->Manufriend_model->mm_show_user();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -234,7 +234,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_user(){
-		$pass["data"]=$this->manufriend_model->mm_show_user();
+		$pass["data"]=$this->Manufriend_model->mm_show_user();
 		echo json_encode($pass);
 	}
 
@@ -249,7 +249,7 @@ class Welcome extends CI_Controller {
 			"gender_user"=>"Perempuan",
 			"ttl_user"=>""
 		);
-		$this->manufriend_model->mm_insert_user($data);
+		$this->Manufriend_model->mm_insert_user($data);
 		echo "sudah masuk";
 	}*/
 
@@ -260,7 +260,7 @@ class Welcome extends CI_Controller {
 		$data = array(
 			"id_user"=>$id_user
 		);
-		$this->manufriend_model->mm_delete_user($data);
+		$this->Manufriend_model->mm_delete_user($data);
 		redirect("welcome/user");
 	}
 
@@ -268,7 +268,7 @@ class Welcome extends CI_Controller {
 	public function hang_out(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_hang_out();
+		$pass["values"]= $this->Manufriend_model->mm_show_hang_out();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -279,7 +279,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_hang_out(){
-		$pass["data"]=$this->manufriend_model->mm_show_hang_out();
+		$pass["data"]=$this->Manufriend_model->mm_show_hang_out();
 		echo json_encode($pass);
 	}
 
@@ -287,7 +287,7 @@ class Welcome extends CI_Controller {
 	public function shopping(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_shopping();
+		$pass["values"]= $this->Manufriend_model->mm_show_shopping();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -298,7 +298,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_shopping(){
-		$pass["data"]=$this->manufriend_model->mm_show_shopping();
+		$pass["data"]=$this->Manufriend_model->mm_show_shopping();
 		echo json_encode($pass);
 	}
 
@@ -306,7 +306,7 @@ class Welcome extends CI_Controller {
 	public function chit_chat(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_chit_chat();
+		$pass["values"]= $this->Manufriend_model->mm_show_chit_chat();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -317,7 +317,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_chit_chat(){
-		$pass["data"]=$this->manufriend_model->mm_show_chit_chat();
+		$pass["data"]=$this->Manufriend_model->mm_show_chit_chat();
 		echo json_encode($pass);
 	}
 
@@ -325,7 +325,7 @@ class Welcome extends CI_Controller {
 	public function sport(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_sport();
+		$pass["values"]= $this->Manufriend_model->mm_show_sport();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -336,7 +336,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_sport(){
-		$pass["data"]=$this->manufriend_model->mm_show_sport();
+		$pass["data"]=$this->Manufriend_model->mm_show_sport();
 		echo json_encode($pass);
 	}
 
@@ -344,7 +344,7 @@ class Welcome extends CI_Controller {
 	public function attending_party(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_attending_party();
+		$pass["values"]= $this->Manufriend_model->mm_show_attending_party();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -355,7 +355,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_attending_party(){
-		$pass["data"]=$this->manufriend_model->mm_show_attending_party();
+		$pass["data"]=$this->Manufriend_model->mm_show_attending_party();
 		echo json_encode($pass);
 	}
 
@@ -363,7 +363,7 @@ class Welcome extends CI_Controller {
 	public function others(){
 		$pass["valemail"]= $this->session->userdata["email"];
 
-		$pass["values"]= $this->manufriend_model->mm_show_others();
+		$pass["values"]= $this->Manufriend_model->mm_show_others();
 		//echo json_encode($pass)
 		
 			$this->load->view("admin/01_view_head");
@@ -374,7 +374,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function api_others(){
-		$pass["data"]=$this->manufriend_model->mm_show_others();
+		$pass["data"]=$this->Manufriend_model->mm_show_others();
 		echo json_encode($pass);
 	}
 
@@ -395,7 +395,7 @@ class Welcome extends CI_Controller {
 			"role_user"=> 2
 		);
 
-		$this->manufriend_model->mm_insert_new_user($dataParsing);
+		$this->Manufriend_model->mm_insert_new_user($dataParsing);
 		echo json_encode($dataParsing);
 	}
 
@@ -418,12 +418,12 @@ class Welcome extends CI_Controller {
 			"role_user"=> 2
 		);
 
-		$cekemail = $this->manufriend_model->mm_cek_email($dataParsing['email_user']);
+		$cekemail = $this->Manufriend_model->mm_cek_email($dataParsing['email_user']);
 
 		if($dataParsing!=null && $cekemail<1){
 			$data["response"] = 200;
 			$data["message"] = "Data Anda berhasil didaftarkan";
-			$this->manufriend_model->mm_insert_new_user($dataParsing);
+			$this->Manufriend_model->mm_insert_new_user($dataParsing);
 		}
 		else if($cekemail>0){
 			$data["response"] = 404;
